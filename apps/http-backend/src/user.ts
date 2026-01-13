@@ -1,6 +1,6 @@
 import { Request,Response } from "express"
 import jwt  from "jsonwebtoken"
-import { JWT_SECRET } from "./config"
+import { JWT_SECRET } from "@repo/back-common/config"
 
 const signup=async(req:Request,res:Response)=>{
     //dbcall to create user

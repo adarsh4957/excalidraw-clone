@@ -35,6 +35,10 @@ importers:
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
+    devDependencies:
+      '@repo/back-common':
+        specifier: workspace:*
+        version: link:../../packages/back-common
 
   apps/web:
     dependencies:
@@ -90,6 +94,23 @@ importers:
       ws:
         specifier: ^8.19.0
         version: 8.19.0
+    devDependencies:
+      '@repo/back-common':
+        specifier: workspace:*
+        version: link:../../packages/back-common
+
+  packages/back-common:
+    dependencies:
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.15.3
+      zod:
+        specifier: ^4.3.5
+        version: 4.3.5
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
 
   packages/eslint-config:
     devDependencies:
@@ -1728,6 +1749,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@4.3.5:
+    resolution: {integrity: sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==}
 
 snapshots:
 
@@ -3558,3 +3582,5 @@ snapshots:
   ws@8.19.0: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@4.3.5: {}
