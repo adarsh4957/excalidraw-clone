@@ -39,6 +39,9 @@ importers:
       '@repo/back-common':
         specifier: workspace:*
         version: link:../../packages/back-common
+      '@repo/common':
+        specifier: workspace:*
+        version: link:../../packages/common
 
   apps/web:
     dependencies:
@@ -104,6 +107,16 @@ importers:
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
+      zod:
+        specifier: ^4.3.5
+        version: 4.3.5
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+
+  packages/common:
+    dependencies:
       zod:
         specifier: ^4.3.5
         version: 4.3.5

@@ -16,7 +16,8 @@
     "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
-    "@repo/back-common":"workspace:*"
+    "@repo/back-common":"workspace:*",
+    "@repo/common":"workspace:*"
   },
   "keywords": [],
   "author": "",
