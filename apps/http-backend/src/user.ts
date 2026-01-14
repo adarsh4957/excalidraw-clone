@@ -4,6 +4,8 @@ import { JWT_SECRET } from "@repo/back-common/config";
 import {createuserschema} from "@repo/common/types";
 import {signinschema} from "@repo/common/types";
 import {createroomschema} from "@repo/common/types";
+import prismaClient from "@repo/db/client";
+
 
 const signup=async(req:Request,res:Response)=>{
     //dbcall to create user
