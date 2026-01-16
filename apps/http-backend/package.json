@@ -17,8 +17,7 @@
   },
   "devDependencies": {
     "@repo/back-common":"workspace:*",
-    "@repo/common":"workspace:*",
-    "@repo/db":"workspace:*"
+    "@repo/common":"workspace:*"
   },
   "keywords": [],
   "author": "",
