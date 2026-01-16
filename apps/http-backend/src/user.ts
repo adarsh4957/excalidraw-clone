@@ -17,6 +17,14 @@ const signup=async(req:Request,res:Response)=>{
             })
             return ;
         }
+        const existuser=await prismaClient.user.findFirst({where:{
+            email:input.data?.username
+        }})
+        if(existuser){
+            return res.status(400).json({
+                message:"user already exist",
+            })
+        }
         const user= await prismaClient.user.create({
             data:{
                 //@ts-ignore
@@ -27,6 +35,7 @@ const signup=async(req:Request,res:Response)=>{
                 password:input.data?.password
             }
         })
+        
         if(!user){
             return res.status(400).json({
                 message:"user not registered",
@@ -34,6 +43,7 @@ const signup=async(req:Request,res:Response)=>{
         }
         return res.status(200).json({
             message:"User signup completed",
+            user:user
         })
     } catch (error) {
         return res.status(400).json({
@@ -44,18 +54,36 @@ const signup=async(req:Request,res:Response)=>{
 }
 
 const signin=async(req:Request,res:Response)=>{
-    const data =signinschema.safeParse(req.body);
-    if(!data){
-        res.status(403).json({
-            message:"Invalid Inputs"
+    try {
+        const input =signinschema.safeParse(req.body);
+        if(!input){
+            res.status(403).json({
+                message:"Invalid Inputs"
+            })
+            return;
+        }
+        const user=await prismaClient.user.findFirst({
+            where:{
+                email:input.data?.username,
+                password:input.data?.password
+            }
         })
-        return;
+        if(!user){
+            return res.status(400).json({
+                message:"Invalid credentials",
+            })
+        }
+        const userid=user?.id;
+        const token = jwt.sign({userid:userid},JWT_SECRET)
+        res.json({
+            token:token,
+        })
+    } catch (error) {
+        return res.status(400).json({
+            message:"Error in signing in",
+            error:error,
+        })
     }
-    const userid=1;
-    const token = jwt.sign({userid:userid},JWT_SECRET)
-    res.json({
-        token:token,
-    })
 }
 
 const room=async(req:Request,res:Response)=>{
