@@ -1,6 +1,6 @@
 import  express  from "express";
 import { room, signin, signup } from "./user";
-import middleware from "./middleware";
+import {middleware} from "./middleware";
 
 const app=express();
 app.use(express.json());
@@ -11,4 +11,4 @@ app.post("/signin",signin)
 app.post("/room",middleware,room)
 
 
-app.listen(3001);
+app.listen(3002);

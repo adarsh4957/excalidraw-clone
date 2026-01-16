@@ -74,7 +74,7 @@ const signin=async(req:Request,res:Response)=>{
             })
         }
         const userid=user?.id;
-        const token = jwt.sign({userid:userid},JWT_SECRET)
+        const token = jwt.sign({userId:userid},JWT_SECRET)
         res.json({
             token:token,
         })
@@ -87,17 +87,32 @@ const signin=async(req:Request,res:Response)=>{
 }
 
 const room=async(req:Request,res:Response)=>{
-    const data=createroomschema.safeParse(req.body);
-    if(!data){
+    const input=createroomschema.safeParse(req.body);
+    if(!input){
         res.status(403).json({
             message:"Invalid Inputs"
         })
         return;
     }
-    //dbcall
-    res.json({
-        roomId:123
-    })
+    //@ts-ignore
+    const userId=req.userId;
+     try {
+        const room = await prismaClient.room.create({
+            data: {
+                //@ts-ignore
+                slug: input.data.name,
+                adminId: userId
+            }
+        })
+
+        res.json({
+            roomId: room.id
+        })
+    } catch(e) {
+        res.status(411).json({
+            message: "Room already exists with this name"
+        })
+    }
 }
 
 
