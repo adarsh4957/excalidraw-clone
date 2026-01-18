@@ -57,6 +57,13 @@ wss.on('connection', function connection(ws,request) {
     }
     user.rooms=user.rooms.filter(x=>x ===parseddata.room)
   }
+  if(parseddata.type==="create_room"){
+    const user=users.find(x=>x.ws===ws)
+    if(!user){
+      return;
+    }
+    
+  }
   if(parseddata.type==="chat"){
     const room=parseddata.roomId;
     const message=parseddata.message;
