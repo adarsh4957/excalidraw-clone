@@ -115,5 +115,24 @@ const room=async(req:Request,res:Response)=>{
     }
 }
 
+const prevchat= async(req:Request,res:Response)=>{
+    const roomid=Number(req.params.roomid);
+    const messages=await prismaClient.chat.findMany({
+        where:{
+            roomId:roomid,
+        },
+        take:50,
+        orderBy:{id:"desc"}
+    })
+    if(!messages){
+        return res.status(400).json({
+            message:"Message not found"
+        })
+    }
+    return res.status(200).json({
+        message:"Mesages found",
+        chats:messages
+    })
+}
 
-export {signin,signup,room};
+export {signin,signup,room,prevchat};
